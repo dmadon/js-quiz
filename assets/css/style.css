@@ -49,7 +49,7 @@ div{
     width: 60%;
     margin: 20px;
 }
-.button, .answer-button{
+.button, .ansBtn1, .ansBtn2, .ansBtn3, .ansBtn4{
     height: 80px;
     width: 50%;
     background-color: var(--accent-color-1);
@@ -62,10 +62,10 @@ div{
     text-align: left;
     display: block;
 }
-.button:hover, .answer-button:hover{
+.button:hover, .ansBtn1:hover, .ansBtn2:hover, .ansBtn3:hover, .ansBtn4:hover{
     background-color: var(--primary-color);
 }
-.button:active, .answer-button:active{
+.button:active, .ansBtn1:active, .ansBtn2:active, .ansBtn3:active, .ansBtn4:active{
     background-color: var(--accent-color-3);
 }
 #start-button{
