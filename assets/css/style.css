@@ -1,0 +1,79 @@
+:root{
+    --primary-color: #ffb60e;
+    --accent-color-1: #0022a6;
+    --accent-color-2: #ffffff;
+    --accent-color-3: #002468;
+}
+h1, h2, h3, h4, h5, h6, p, a, .header-item, .button{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+h1, a{
+    color: var(--accent-color-2);
+    margin: 35px;
+    font-size: 38px; 
+    font-weight: bold;
+    text-shadow: 2px 2px rgb(0,0,0);
+}
+h2{
+    color: var(--accent-color-1);
+    margin: 35px;
+    font-size: 38px; 
+    font-weight: bold;
+}
+p{
+    color: var(--accent-color-1);
+    font-size: 32px;
+    line-height: 1.5;
+    margin-bottom: 100px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    background-color: var(--primary-color);
+    border-bottom: 5px solid var(--accent-color-1);
+
+}
+.header-item{
+    color: var(--accent-color-2);
+}
+main{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+div{
+    text-align: center;
+    width: 60%;
+    margin: 20px;
+}
+.button, .answer-button{
+    height: 80px;
+    width: 50%;
+    background-color: var(--accent-color-1);
+    color: var(--accent-color-2);
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px auto 0;
+    border-radius: 12px;
+    border: none;
+    text-align: left;
+    display: block;
+}
+.button:hover, .answer-button:hover{
+    background-color: var(--primary-color);
+}
+.button:active, .answer-button:active{
+    background-color: var(--accent-color-3);
+}
+#start-button{
+    text-align: center;
+    align-self: center;
+    width: 30%;
+    margin-top: 100px;
+}
+.hidden{
+    display: none;
+}
