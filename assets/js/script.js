@@ -47,8 +47,14 @@ var i=0;
 
 var showQuestion = function(){
     
+    
         console.log("at beginning of function, i = ",i);
                 
+        if (i == questions.length){
+            alert("no more questions");//REPLACE THIS ALERT WITH END GAME FUNCTIONALITY - STOP TIMER AND LOG THE FINAL TIME AS PLAYER'S SCORE
+        }
+
+        else{
         questionEl.setAttribute("data-question-id",i);
         
         questionTextEl.textContent =JSON.stringify(questions[i].question).slice(1,-1);
@@ -78,7 +84,7 @@ var showQuestion = function(){
         
         i++
         console.log("at end of function, i = ",i);
-        
+        }
 }//end showQuestion function
     
 
