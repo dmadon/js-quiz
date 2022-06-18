@@ -41,64 +41,56 @@ questions=[
 
 
 
+var i=0;
 
 
 
-
-    var createQuestion = function(event){
+var showQuestion = function(){
+    
+        console.log("at beginning of function, i = ",i);
+                
+        questionEl.setAttribute("data-question-id",i);
         
-
+        questionTextEl.textContent =JSON.stringify(questions[i].question).slice(1,-1);
         
-        for (i=0; i <= questions.length-1; i++){
+        answer1El.className="answer-button";
+        answer1El.textContent=JSON.stringify(questions[i].ans1).slice(1,-1);
+        answer1El.addEventListener("click",showQuestion);
 
+
+        answer2El.className="answer-button";
+        answer2El.textContent=JSON.stringify(questions[i].ans2).slice(1,-1);
+        // button2El=document.querySelector(".ansBtn2");
+        // button2El.addEventListener("click",clickResponse);
         
-
-            var target = event.target;
-            var targetId = (target.id);
-            console.log(targetId);
-            startTextEl.className="hidden";
-            
-            
-            questionEl.setAttribute("data-question-id",i);
-          
-            questionTextEl.textContent =JSON.stringify(questions[i].question).slice(1,-1);
-            
-            answer1El.className="answer-button";
-            answer1El.textContent=JSON.stringify(questions[i].ans1).slice(1,-1);
-            answer1El.addEventListener("click",createQuestion);
-
-  
-            answer2El.className="answer-button";
-            answer2El.textContent=JSON.stringify(questions[i].ans2).slice(1,-1);
-            // // button2El=document.querySelector(".ansBtn2");
-            // // button2El.addEventListener("click",clickResponse);
-            
-        
-            answer3El.className="answer-button";
-            answer3El.textContent=JSON.stringify(questions[i].ans3).slice(1,-1);
-            // // button3El=document.querySelector(".ansBtn3");
-            // // button3El.addEventListener("click",clickResponse);
-            
-         
-            answer4El.className="answer-button";
-            answer4El.textContent=JSON.stringify(questions[i].ans4).slice(1,-1);
-            // // button4El=document.querySelector(".ansBtn4");
-            // // button4El.addEventListener("click",clickResponse);
-
-            
-            console.log(i);
-
-            break;
-
+    
+        answer3El.className="answer-button";
+        answer3El.textContent=JSON.stringify(questions[i].ans3).slice(1,-1);
+        // button3El=document.querySelector(".ansBtn3");
+        // button3El.addEventListener("click",clickResponse);
         
         
+        answer4El.className="answer-button";
+        answer4El.textContent=JSON.stringify(questions[i].ans4).slice(1,-1);
+        // button4El=document.querySelector(".ansBtn4");
+        // button4El.addEventListener("click",clickResponse);
 
-        }
-    }
+        
+        i++
+        console.log("at end of function, i = ",i);
+        
+}//end showQuestion function
+    
 
 
 
-startButtonEl.addEventListener("click",createQuestion);
+var startQuiz = function(){    
+    startTextEl.className="hidden";
+    showQuestion(i);
+}
+
+
+startButtonEl.addEventListener("click",startQuiz);
 
 
 
