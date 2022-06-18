@@ -24,7 +24,10 @@ p{
     color: var(--accent-color-1);
     font-size: 32px;
     line-height: 1.5;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
+}
+.red-text {
+    color: red;
 }
 
 .header{

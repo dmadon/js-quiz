@@ -9,6 +9,8 @@ answer1El = document.querySelector("#ans1");
 answer2El = document.querySelector("#ans2");
 answer3El = document.querySelector("#ans3");
 answer4El = document.querySelector("#ans4");
+messageEl = document.querySelector("#messageHolder");
+messageTextEl = document.querySelector("#messageText");
 
 
 
@@ -27,7 +29,7 @@ questions=[
     ans2: "question 2, answer 2",
     ans3: "question 2, answer 3",
     ans4: "question 2, answer 4",
-    correct: "ans1"
+    correct: "ans2"
     },
     {questionId: 3,
     question:  "This is question 3",
@@ -35,7 +37,7 @@ questions=[
     ans2: "question 3, answer 2",
     ans3: "question 3, answer 3",
     ans4: "question 3, answer 4",
-    correct: "ans1"
+    correct: "ans3"
     },
 ];
 
@@ -61,31 +63,28 @@ var showQuestion = function(){
         
         answer1El.className="answer-button";
         answer1El.textContent=JSON.stringify(questions[i].ans1).slice(1,-1);
-        answer1El.addEventListener("click",showQuestion);
+        answer1El.addEventListener("click",checkAnswer);
 
 
         answer2El.className="answer-button";
         answer2El.textContent=JSON.stringify(questions[i].ans2).slice(1,-1);
-        // button2El=document.querySelector(".ansBtn2");
-        // button2El.addEventListener("click",clickResponse);
+        answer2El.addEventListener("click",checkAnswer);
         
     
         answer3El.className="answer-button";
         answer3El.textContent=JSON.stringify(questions[i].ans3).slice(1,-1);
-        // button3El=document.querySelector(".ansBtn3");
-        // button3El.addEventListener("click",clickResponse);
+        answer3El.addEventListener("click",checkAnswer);
         
         
         answer4El.className="answer-button";
         answer4El.textContent=JSON.stringify(questions[i].ans4).slice(1,-1);
-        // button4El=document.querySelector(".ansBtn4");
-        // button4El.addEventListener("click",clickResponse);
-
+        answer4El.addEventListener("click",checkAnswer);
+               
         
-        i++
         console.log("at end of function, i = ",i);
         }
-}//end showQuestion function
+
+}// end showQuestion function
     
 
 
@@ -93,7 +92,52 @@ var showQuestion = function(){
 var startQuiz = function(){    
     startTextEl.className="hidden";
     showQuestion(i);
+}// end startQuizfunction
+
+
+var checkAnswer = function(event){
+    
+    var targetEl=event.target;
+    console.log(targetEl.id);
+    if(targetEl.id == questions[i].correct){
+        messageTextEl.className = "";
+        messageTextEl.textContent = "Correct!";
+        if(i < questions.length-1){
+            i++;
+            showQuestion();
+        }
+        else{
+            // I set the endGame function to run after a timeout because when user anwered the last question in the quiz, endGame was executing before
+            // the last answer was confirmed as correct or incorrect. This is a workaround to ensure the answer is verified before endGame executes.
+            var timeOut = setTimeout(endGame, 500);
+        }
+    }
+
+    else{
+        messageTextEl.className = "red-text";
+        messageTextEl.textContent = "Incorrect - lose 10 seconds";
+        if(i < questions.length-1){
+            i++;
+            showQuestion();
+        }
+        else{
+            // I set the endGame function to run after a timeout because when user anwered the last question in the quiz, endGame was executing before
+            // the last answer was confirmed as correct or incorrect. This is a workaround to ensure the answer is verified before endGame executes.
+            var timeOut = setTimeout(endGame, 500);
+        }
+    }
+}// end checkAnswer function
+
+
+var endGame = function(){
+    alert("You have reached the end of the game.");
+    
 }
+
+
+
+
+
 
 
 startButtonEl.addEventListener("click",startQuiz);
