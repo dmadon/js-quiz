@@ -47,6 +47,9 @@ var i=0;
 
 
 
+
+
+
 var showQuestion = function(){
     
     
@@ -88,9 +91,23 @@ var showQuestion = function(){
     
 
 
+// var startTimer = function()
+
+
+
+
+var t=75;
 
 var startQuiz = function(){    
     startTextEl.className="hidden";
+    setInterval(startTimer = function(){
+        t--;
+        {timerEl.textContent = t-1}
+    
+    
+    },1000);
+
+
     showQuestion(i);
 }// end startQuizfunction
 
@@ -109,7 +126,7 @@ var checkAnswer = function(event){
         else{
             // I set the endGame function to run after a timeout because when user anwered the last question in the quiz, endGame was executing before
             // the last answer was confirmed as correct or incorrect. This is a workaround to ensure the answer is verified before endGame executes.
-            var timeOut = setTimeout(endGame, 500);
+            var timeOut = setTimeout(endGame, 100);
         }
     }
 
@@ -123,7 +140,7 @@ var checkAnswer = function(event){
         else{
             // I set the endGame function to run after a timeout because when user anwered the last question in the quiz, endGame was executing before
             // the last answer was confirmed as correct or incorrect. This is a workaround to ensure the answer is verified before endGame executes.
-            var timeOut = setTimeout(endGame, 500);
+            var timeOut = setTimeout(endGame, 100);
         }
     }
 }// end checkAnswer function
