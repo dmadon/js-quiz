@@ -96,18 +96,26 @@ var showQuestion = function(){
 
 
 
-var t=75;
+var t=6;
+
+var startTimer = function(){
+    if (t>1){
+        timerEl.textContent = t-1;
+        t--;
+    }
+    else{
+        clearInterval(startTimer);
+        timerEl.textContent = "Time's Up!";
+        timerEl.className = "red-text";
+    }
+}
+
+
+
 
 var startQuiz = function(){    
     startTextEl.className="hidden";
-    setInterval(startTimer = function(){
-        t--;
-        {timerEl.textContent = t-1}
-    
-    
-    },1000);
-
-
+    setInterval(startTimer,1000);
     showQuestion(i);
 }// end startQuizfunction
 
