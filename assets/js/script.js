@@ -45,53 +45,58 @@ questions=[
 var t=5;
 var i=0;
 
-var startTimer = function(){
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var startTimer = function(){
+    // if player has answered all questions, the status on the timer element has been set to "stop" by the checkAnswer function. if status is "stop" then stopTimer function should 
+    // clearInterval, stop the timer where it is and go to endGame function.
     if(timerEl.getAttribute("data-timer-status") === "stop"){
         stopTimer();
-        return t;
+    
     }
-        
+    // if time has run out before all questions are answered, timer text shows "Time's Up!" and stopTimer function should clearInterval and go to endGame function.
     else if(t === 0) {
-        stopTimer();
         timerEl.textContent = "Time's Up!";
         timerEl.className = "red-text";
-        return;
+        var timeOut = setTimeout(stopTimer,100);
+        
     }
-    
+    // if there are still questions to be answered and time still on the clock, keep counting down.
     else if (t>0){
         timerEl.textContent = t;
         t--;
     }
-    
-   
 }
-
-
-var stopTimer = function(){
-    clearInterval(startTimer);
-}
-
 
 var startQuiz = function(){   
+
     startTextEl.className="hidden";
-    setInterval(startTimer,1000);
+    countdown = setInterval(startTimer,1000);
     showQuestion(i);
+
 }// end startQuizfunction
 
-
-
+var stopTimer = function(){
+    clearInterval(countdown);
+    endGame();
+}
 
 var showQuestion = function(){
-    
-    
-        console.log("at beginning of function, i = ",i);
-                
-        if (i == questions.length){
-            alert("no more questions");//REPLACE THIS ALERT WITH END GAME FUNCTIONALITY - STOP TIMER AND LOG THE FINAL TIME AS PLAYER'S SCORE
-        }
 
-        else{
+
         questionEl.setAttribute("data-question-id",i);
         
         questionTextEl.textContent =JSON.stringify(questions[i].question).slice(1,-1);
@@ -115,17 +120,10 @@ var showQuestion = function(){
         answer4El.textContent=JSON.stringify(questions[i].ans4).slice(1,-1);
         answer4El.addEventListener("click",checkAnswer);
                
-        
-        console.log("at end of function, i = ",i);
-        }
-
-}// end showQuestion function
     
 
 
-// var startTimer = function()
-
-
+}// end showQuestion function
 
 
 
@@ -145,7 +143,7 @@ var checkAnswer = function(event){
         else{
             // I set the endGame function to run after a timeout because when user anwered the last question in the quiz, endGame was executing before
             // the last answer was confirmed as correct or incorrect. This is a workaround to ensure the answer is verified before endGame executes.
-            var timeOut = setTimeout(endGame, 100);
+
             timerEl.setAttribute("data-timer-status","stop");
         }
     }
@@ -160,7 +158,7 @@ var checkAnswer = function(event){
         else{
             // I set the endGame function to run after a timeout because when user anwered the last question in the quiz, endGame was executing before
             // the last answer was confirmed as correct or incorrect. This is a workaround to ensure the answer is verified before endGame executes.
-            var timeOut = setTimeout(endGame, 100);
+
             timerEl.setAttribute("data-timer-status","stop");
         }
     }
@@ -168,7 +166,18 @@ var checkAnswer = function(event){
 
 
 var endGame = function(){
-    alert("You have reached the end of the game.");
+
+    if(timerEl.textContent=="Time's Up!"){
+
+        alert("Your time ran out. Your score is 0.");
+
+
+    }
+    else if (i === questions.length-1){
+
+        alert("You have answered all the questions. Your score is "+ timerEl.textContent);
+    }
+    
     
 }
 
