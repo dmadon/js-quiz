@@ -11,6 +11,14 @@ answer3El = document.querySelector("#ans3");
 answer4El = document.querySelector("#ans4");
 messageEl = document.querySelector("#messageHolder");
 messageTextEl = document.querySelector("#messageText");
+endGameEl = document.querySelector("#endGameNotice");
+endGameTextEl = document.querySelector("#endGameText");
+initialsEl = document.querySelector("#initialsInputHolder");
+initialsInstructionsEl = document.querySelector("#initialsInstructions");
+inputInitialsEl = document.querySelector("#inputInitials");
+
+
+highScores=[];
 
 
 
@@ -46,20 +54,6 @@ var t=30;
 var i=0;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var startTimer = function(){
     // if player has answered all questions, the status on the timer element has been set to "stop" by the checkAnswer function. if status is "stop" then stopTimer function should 
     // clearInterval, stop the timer where it is and go to endGame function.
@@ -90,7 +84,7 @@ var startQuiz = function(){
 }// end startQuizfunction
 
 var stopTimer = function(){
-    clearInterval(countdown);
+    
     endGame();
 }
 
@@ -148,7 +142,8 @@ var checkAnswer = function(event){
     else{
         messageTextEl.className = "red-text";
         messageTextEl.textContent = "Incorrect - lose 10 seconds";
-        t=t-10;
+        t= Math.max(0,t-10);
+        timerEl.textContent=t;
         if(i < questions.length-1){
             i++;
             showQuestion();
@@ -162,16 +157,32 @@ var checkAnswer = function(event){
 
 var endGame = function(){
 
+    clearInterval(countdown);
+
     if(timerEl.textContent=="Time's Up!"){
 
-        alert("Your time ran out. Your score is 0.");
+        var score = 0;
 
-
+        endGameTextEl.textContent=("You ran out of time! Your score is "+score+".")
+        
     }
     else if (i === questions.length-1){
 
-        alert("You have answered all the questions. Your score is "+ timerEl.textContent);
+        var score = t;
+
+        endGameTextEl.textContent=("You answered all the questions! Your score is "+score+".")
+
     }
+
+    questionEl.className="hidden";
+    messageEl.className="hidden";
+    endGameEl.className="";
+    endGameTextEl.className="";
+
+
+    
+
+
     
     
 }
