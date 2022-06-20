@@ -42,7 +42,7 @@ questions=[
 ];
 
 
-var t=5;
+var t=30;
 var i=0;
 
 
@@ -141,9 +141,6 @@ var checkAnswer = function(event){
             showQuestion();
         }
         else{
-            // I set the endGame function to run after a timeout because when user anwered the last question in the quiz, endGame was executing before
-            // the last answer was confirmed as correct or incorrect. This is a workaround to ensure the answer is verified before endGame executes.
-
             timerEl.setAttribute("data-timer-status","stop");
         }
     }
@@ -151,14 +148,12 @@ var checkAnswer = function(event){
     else{
         messageTextEl.className = "red-text";
         messageTextEl.textContent = "Incorrect - lose 10 seconds";
+        t=t-10;
         if(i < questions.length-1){
             i++;
             showQuestion();
         }
         else{
-            // I set the endGame function to run after a timeout because when user anwered the last question in the quiz, endGame was executing before
-            // the last answer was confirmed as correct or incorrect. This is a workaround to ensure the answer is verified before endGame executes.
-
             timerEl.setAttribute("data-timer-status","stop");
         }
     }
