@@ -42,10 +42,42 @@ questions=[
 ];
 
 
-
+var t=5;
 var i=0;
 
+var startTimer = function(){
 
+    if(timerEl.getAttribute("data-timer-status") === "stop"){
+        stopTimer();
+        return t;
+    }
+        
+    else if(t === 0) {
+        stopTimer();
+        timerEl.textContent = "Time's Up!";
+        timerEl.className = "red-text";
+        return;
+    }
+    
+    else if (t>0){
+        timerEl.textContent = t;
+        t--;
+    }
+    
+   
+}
+
+
+var stopTimer = function(){
+    clearInterval(startTimer);
+}
+
+
+var startQuiz = function(){   
+    startTextEl.className="hidden";
+    setInterval(startTimer,1000);
+    showQuestion(i);
+}// end startQuizfunction
 
 
 
@@ -96,28 +128,7 @@ var showQuestion = function(){
 
 
 
-var t=6;
 
-var startTimer = function(){
-    if (t>1){
-        timerEl.textContent = t-1;
-        t--;
-    }
-    else{
-        clearInterval(startTimer);
-        timerEl.textContent = "Time's Up!";
-        timerEl.className = "red-text";
-    }
-}
-
-
-
-
-var startQuiz = function(){    
-    startTextEl.className="hidden";
-    setInterval(startTimer,1000);
-    showQuestion(i);
-}// end startQuizfunction
 
 
 var checkAnswer = function(event){
@@ -135,6 +146,7 @@ var checkAnswer = function(event){
             // I set the endGame function to run after a timeout because when user anwered the last question in the quiz, endGame was executing before
             // the last answer was confirmed as correct or incorrect. This is a workaround to ensure the answer is verified before endGame executes.
             var timeOut = setTimeout(endGame, 100);
+            timerEl.setAttribute("data-timer-status","stop");
         }
     }
 
@@ -149,6 +161,7 @@ var checkAnswer = function(event){
             // I set the endGame function to run after a timeout because when user anwered the last question in the quiz, endGame was executing before
             // the last answer was confirmed as correct or incorrect. This is a workaround to ensure the answer is verified before endGame executes.
             var timeOut = setTimeout(endGame, 100);
+            timerEl.setAttribute("data-timer-status","stop");
         }
     }
 }// end checkAnswer function
