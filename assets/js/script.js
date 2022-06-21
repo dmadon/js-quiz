@@ -19,12 +19,14 @@ inputInitialsEl = document.querySelector("#inputInitials");
 buttonHolderEl = document.querySelector("#button-holder");
 saveScoreBtnEl = document.querySelector("#saveScoreBtn");
 cancelScoreBtnEl = document.querySelector("#cancelScoreBtn");
+highScoresListEl = document.querySelector("#scores-list-group");
+noScoresMessageEl = document. querySelector("#noScoresMessage");
 
 
 
 
 
-
+// CODE FOR INDEX.HTML PAGE-------------------------------------------------------------------
 
 questions=[
     {questionId: 1,
@@ -119,8 +121,6 @@ var showQuestion = function(){
         answer4El.addEventListener("click",checkAnswer);
                
     
-
-
 }// end showQuestion function
 
 
@@ -183,9 +183,7 @@ var endGame = function(){
     endGameEl.className="";
     endGameTextEl.className="";
     buttonHolderEl.className="";
-
-
-}
+}// end endGame function
 
 highScores=[];
 
@@ -203,7 +201,9 @@ var saveScores = function(){
     }
     else{
         savedScores=JSON.parse(savedScores);
-        highScores.push(savedScores);
+        for (var i = 0; i < savedScores.length; i++) {
+            highScores.push(savedScores[i]);
+        }
         highScores.push({
             "initials": inputInitialsEl.value,
             "score": t
@@ -216,11 +216,50 @@ var saveScores = function(){
 
 
 
+// end of code for index.html page
+
+
+// CODE FOR high-scores.html PAGE ------------------------------------------------------------
+
+
+var loadScores = function(){
+
+    var savedScores = localStorage.getItem("scores");
+    
+    if(!savedScores){
+        noScoresMessageEl.className="";
+        }
+    
+   
+    else{
+        
+        savedScores=JSON.parse(savedScores);
+        for (var i = 0; i < 10; i++) {
+            var listItem = document.createElement("li");
+            listItem.className = "list-item";
+            listItem.textContent = savedScores[i].initials +": "+savedScores[i].score;
+            highScoresListEl.appendChild(listItem);
+        }
+        
+      
+    }
+   return;
+}
+
+loadScores();
+
+
+
+
 
 
 
 
 startButtonEl.addEventListener("click",startQuiz);
 saveScoreBtnEl.addEventListener("click",saveScores);
+
+
+
+
 
 
