@@ -52,7 +52,7 @@ div{
     width: 60%;
     margin: 20px;
 }
-.button, .answer-button{
+.button, .answer-button, .score-button{
     height: 80px;
     width: 50%;
     background-color: var(--accent-color-1);
@@ -65,15 +65,25 @@ div{
     text-align: left;
     display: block;
 }
-.button:hover, .answer-button:hover{
+.button:hover, .answer-button:hover, .score-button:hover{
     background-color: var(--primary-color);
 }
-.button:active, .answer-button:active{
+.button:active, .answer-button:active, .score-button:active{
     background-color: var(--accent-color-3);
 }
+.score-button{
+    width: 25%;
+    text-align: center;
+    margin: 0;
+}
+#button-holder{
+    width: auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #start-button{
     text-align: center;
-    align-self: center;
     width: 30%;
     margin-top: 100px;
 }
@@ -81,7 +91,8 @@ div{
     display: none;
 }
 #initialsInputHolder{
-    width: 100%;
+    width: auto;
+    justify-content: center;
 }
 input{
     height: 50px;

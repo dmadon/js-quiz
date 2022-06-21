@@ -16,9 +16,13 @@ endGameTextEl = document.querySelector("#endGameText");
 initialsEl = document.querySelector("#initialsInputHolder");
 initialsInstructionsEl = document.querySelector("#initialsInstructions");
 inputInitialsEl = document.querySelector("#inputInitials");
+buttonHolderEl = document.querySelector("#button-holder");
+saveScoreBtnEl = document.querySelector("#saveScoreBtn");
+cancelScoreBtnEl = document.querySelector("#cancelScoreBtn");
 
 
-highScores=[];
+
+
 
 
 
@@ -84,7 +88,7 @@ var startQuiz = function(){
 }// end startQuizfunction
 
 var stopTimer = function(){
-    
+    clearInterval(countdown);
     endGame();
 }
 
@@ -157,7 +161,7 @@ var checkAnswer = function(event){
 
 var endGame = function(){
 
-    clearInterval(countdown);
+    
 
     if(timerEl.textContent=="Time's Up!"){
 
@@ -178,14 +182,37 @@ var endGame = function(){
     messageEl.className="hidden";
     endGameEl.className="";
     endGameTextEl.className="";
+    buttonHolderEl.className="";
 
 
-    
-
-
-    
-    
 }
+
+highScores=[];
+
+var saveScores = function(){
+    
+    var savedScores = localStorage.getItem("scores");
+
+    if(!savedScores){
+        highScores.push({
+            "initials": inputInitialsEl.value,
+            "score": t
+        })
+    
+        localStorage.setItem("scores", JSON.stringify(highScores));
+    }
+    else{
+        savedScores=JSON.parse(savedScores);
+        highScores.push(savedScores);
+        highScores.push({
+            "initials": inputInitialsEl.value,
+            "score": t
+        })
+        localStorage.setItem("scores", JSON.stringify(highScores));
+    }
+}// end of saveScores function
+
+
 
 
 
@@ -194,6 +221,6 @@ var endGame = function(){
 
 
 startButtonEl.addEventListener("click",startQuiz);
-
+saveScoreBtnEl.addEventListener("click",saveScores);
 
 
