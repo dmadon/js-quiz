@@ -3,8 +3,9 @@
     --accent-color-1: #0022a6;
     --accent-color-2: #ffffff;
     --accent-color-3: #002468;
+    --accent-color-4: #ffdc71;
 }
-h1, h2, h3, h4, h5, h6, p, a, .header-item, .button, input{
+h1, h2, h3, h4, h5, h6, p, a, .header-item, .button, input, li{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 h1, a{
@@ -100,5 +101,18 @@ input{
     font-size: 32px;
     text-align: center;
     border: 2px solid var(--accent-color-1);
-
+}
+li{
+    color: var(--accent-color-1);
+    font-size: 32px;
+    line-height: 1.5;
+    list-style: none;
+}
+li:nth-child(odd){
+    background-color: var(--accent-color-4)
+}
+ul{
+    width: 30%;
+    border: 2px solid var(--accent-color-1);
+    padding: 0;
 }
