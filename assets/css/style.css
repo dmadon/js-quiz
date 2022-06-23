@@ -3,8 +3,9 @@
     --accent-color-1: #0022a6;
     --accent-color-2: #ffffff;
     --accent-color-3: #002468;
+    --accent-color-4: #ffdc71;
 }
-h1, h2, h3, h4, h5, h6, p, a, .header-item, .button, input{
+h1, h2, h3, h4, h5, h6, p, a, .header-item, .button, input, li{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 h1, a{
@@ -20,7 +21,7 @@ h2{
     font-size: 38px; 
     font-weight: bold;
 }
-p{
+p, li{
     color: var(--accent-color-1);
     font-size: 32px;
     line-height: 1.5;
@@ -101,4 +102,17 @@ input{
     text-align: center;
     border: 2px solid var(--accent-color-1);
 
+}
+ul{
+    border: 2px solid var(--accent-color-1);
+    list-style: none;
+    padding: 0;
+    width: 30%;
+}
+li{
+    margin: 0;
+    text-align: center;
+}
+li:nth-child(odd){
+    background-color: var(--accent-color-4);
 }

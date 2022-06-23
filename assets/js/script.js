@@ -22,6 +22,7 @@ cancelScoreBtnEl = document.querySelector("#cancelScoreBtn");
 highScoresListEl = document.querySelector("#scores-list-group");
 noScoresMessageEl = document.querySelector("#noScoresMessage");
 validateInitialsEl = document.querySelector("#validate-initials");
+highScoresPageLinkEl = document.querySelector("#load-high-scores");
 
 
 
@@ -208,7 +209,7 @@ var saveScores = function(){//ADD A FUNCTION TO TAKE USER TO THE HIGH SCORES PAG
             });
             localStorage.setItem("scores", JSON.stringify(highScores));
             window.location.href="./high-scores.html";
-            // loadScores();
+            
             
         }   
         
@@ -231,14 +232,17 @@ var saveScores = function(){//ADD A FUNCTION TO TAKE USER TO THE HIGH SCORES PAG
                 "initials": inputInitialsEl.value,
                 "score": t
             });
+            
             localStorage.setItem("scores", JSON.stringify(highScores));
             window.location.href="./high-scores.html";
             
             
         }
         
-        loadScores();
+       
     }
+    
+    return;
 }// end of saveScores function
 
 var cancelScores = function(){
@@ -252,30 +256,36 @@ var cancelScores = function(){
 // CODE FOR high-scores.html PAGE ------------------------------------------------------------
 
 
+
+
+
 var loadScores = function(){
 
-    console.log("load saved scores, please");
     
-    // var savedScores = localStorage.getItem("scores");
+
     
-    // if(!savedScores){
-    //     noScoresMessageEl.className="";
-    //     }
+  
+    var savedScores = localStorage.getItem("scores");
+    
+    if(!savedScores){
+        noScoresMessageEl.className="";
+        }
     
    
-    // else{
-        
-    //     savedScores=JSON.parse(savedScores);
-    //     for (var i = 0; i < savedScores.length; i++) {
-    //         var listItem = document.createElement("li");
-    //         listItem.className = "list-item";
-    //         listItem.textContent = savedScores[i].initials +": "+savedScores[i].score;
-    //         highScoresListEl.appendChild(listItem);
-    //     }
+    else{
+        // window.location.href="./high-scores.html";
+        console.log("seriously???");
+        savedScores=JSON.parse(savedScores);
+        for (var i = 0; i < savedScores.length; i++) {
+            var listItem = document.createElement("li");
+            listItem.className = "list-item";
+            listItem.textContent = savedScores[i].initials +": "+savedScores[i].score;
+            highScoresListEl.appendChild(listItem);
+        }
         
       
-    // }
-    // // return;
+    }
+    return;
 }
 
 
@@ -290,7 +300,7 @@ var loadScores = function(){
     startButtonEl.addEventListener("click",startQuiz);
     saveScoreBtnEl.addEventListener("click",saveScores);
     cancelScoreBtnEl.addEventListener("click",cancelScores);
-
+    highScoresPageLinkEl.addEventListener("click",loadScores);
 
 
 
