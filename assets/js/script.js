@@ -25,40 +25,43 @@ validateInitialsEl = document.querySelector("#validate-initials");
 highScoresPageLinkEl = document.querySelector("#load-high-scores");
 
 
-
-
-
-// CODE FOR INDEX.HTML PAGE-------------------------------------------------------------------
-
 questions=[
     {questionId: 1,
-    question:  "This is question 1",
-    ans1: "question 1, answer 1",
-    ans2: "question 1, answer 2",
-    ans3: "question 1, answer 3",
-    ans4: "question 1, answer 4",
-    correct: "ans1"
+    question:  "Inside which HTML element do we put the JavaScript?",
+    ans1: "<js>",
+    ans2: "<javascript>",
+    ans3: "<script>",
+    ans4: "<scripting>",
+    correct: "ans3"
     },
     {questionId: 2,
-    question:  "This is question 2",
-    ans1: "question 2, answer 1",
-    ans2: "question 2, answer 2",
-    ans3: "question 2, answer 3",
-    ans4: "question 2, answer 4",
+    question:  "Where is the correct place to insert a JavaScript?",
+    ans1: "The <head> section",
+    ans2: "The <body> section",
+    ans3: "Both the <head> and the <body> sections are correct",
+    ans4: "None of the above",
     correct: "ans2"
     },
     {questionId: 3,
-    question:  "This is question 3",
-    ans1: "question 3, answer 1",
-    ans2: "question 3, answer 2",
-    ans3: "question 3, answer 3",
-    ans4: "question 3, answer 4",
+    question:  "What is the correct syntax for referring to an external script called 'xxx.js'?",
+    ans1: "<script = 'xxx.js'>",
+    ans2: "<script href = 'xxx.js'",
+    ans3: "<script src = 'xxx.js'",
+    ans4: "<script name = 'xxx.js'",
+    correct: "ans3"
+    },
+    {questionId: 4,
+    question:  "How do you write 'Hello World' in an alert box?",
+    ans1: "msgBox('Hello World')",
+    ans2: "alertBox('Hello World')",
+    ans3: "alert('Hello World')",
+    ans4: "msg('Hello World')'",
     correct: "ans3"
     },
 ];
 
 
-var t=30;
+var t=75;
 var i=0;
 
 
@@ -73,7 +76,7 @@ var startTimer = function(){
     else if(t === 0) {
         timerEl.textContent = "Time's Up!";
         timerEl.className = "red-text";
-        var timeOut = setTimeout(stopTimer,100);
+        var timeOut = setTimeout(stopTimer, 10);
         
     }
     // if there are still questions to be answered and time still on the clock, keep counting down.
@@ -127,12 +130,10 @@ var showQuestion = function(){
 
 
 
-
-
 var checkAnswer = function(event){
     
     var targetEl=event.target;
-    console.log(targetEl.id);
+    
     if(targetEl.id == questions[i].correct){
         messageTextEl.className = "";
         messageTextEl.textContent = "Correct!";
@@ -163,8 +164,6 @@ var checkAnswer = function(event){
 
 var endGame = function(){
 
-    
-
     if(timerEl.textContent=="Time's Up!"){
 
         var score = 0;
@@ -189,35 +188,31 @@ var endGame = function(){
 
 
 
-var saveScores = function(){//ADD A FUNCTION TO TAKE USER TO THE HIGH SCORES PAGE AFTER THEY CLICK THE SAVE SCORE BUTTON
+var saveScores = function(){
     
     var savedScores = localStorage.getItem("scores");
 
     if(!savedScores){
         highScores=[];
-        if(inputInitialsEl.value == ""){
-            console.log("initials null");
+        if(inputInitialsEl.value == ""){           
             validateInitialsEl.className="red-text";
             var vanishMessage = setTimeout (function(){
                 validateInitialsEl.className="hidden";
             },2000);
         }
         else{
-            highScores.push({
+            highScores.unshift({
                 "initials": inputInitialsEl.value,
                 "score": t
             });
             localStorage.setItem("scores", JSON.stringify(highScores));
             window.location.href="./high-scores.html";
-            
-            
         }   
         
     }
     else{
         highScores=[];
         if(inputInitialsEl.value == ""){
-            console.log("initials null");
             validateInitialsEl.className="red-text";
             var vanishMessage = setTimeout (function(){
                 validateInitialsEl.className="hidden";
@@ -225,21 +220,17 @@ var saveScores = function(){//ADD A FUNCTION TO TAKE USER TO THE HIGH SCORES PAG
         }
         else{
         savedScores=JSON.parse(savedScores);
-            for (var i = 0; i < savedScores.length; i++) {
+            for (var i = 0; i < 10; i++) {
                 highScores.push(savedScores[i]);
             }
-            highScores.push({
+            highScores.unshift({
                 "initials": inputInitialsEl.value,
                 "score": t
             });
             
             localStorage.setItem("scores", JSON.stringify(highScores));
             window.location.href="./high-scores.html";
-            
-            
         }
-        
-       
     }
     
     return;
@@ -253,48 +244,25 @@ var cancelScores = function(){
 
 
 
-// CODE FOR high-scores.html PAGE ------------------------------------------------------------
-
-
-
-
 
 var loadScores = function(){
 
-    
-
-    
-  
     var savedScores = localStorage.getItem("scores");
     
     if(!savedScores){
         noScoresMessageEl.className="";
         }
-    
-   
     else{
-        // window.location.href="./high-scores.html";
-        console.log("seriously???");
         savedScores=JSON.parse(savedScores);
-        for (var i = 0; i < savedScores.length; i++) {
+        for (var i = 0; i < 10; i++) {
             var listItem = document.createElement("li");
             listItem.className = "list-item";
             listItem.textContent = savedScores[i].initials +": "+savedScores[i].score;
             highScoresListEl.appendChild(listItem);
         }
-        
-      
     }
     return;
 }
-
-
-
-
-
-
-
-
 
 
     startButtonEl.addEventListener("click",startQuiz);
