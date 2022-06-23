@@ -20,7 +20,8 @@ buttonHolderEl = document.querySelector("#button-holder");
 saveScoreBtnEl = document.querySelector("#saveScoreBtn");
 cancelScoreBtnEl = document.querySelector("#cancelScoreBtn");
 highScoresListEl = document.querySelector("#scores-list-group");
-noScoresMessageEl = document. querySelector("#noScoresMessage");
+noScoresMessageEl = document.querySelector("#noScoresMessage");
+validateInitialsEl = document.querySelector("#validate-initials");
 
 
 
@@ -185,38 +186,67 @@ var endGame = function(){
     buttonHolderEl.className="";
 }// end endGame function
 
-highScores=[];
 
-var saveScores = function(){
+
+var saveScores = function(){//ADD A FUNCTION TO TAKE USER TO THE HIGH SCORES PAGE AFTER THEY CLICK THE SAVE SCORE BUTTON
     
     var savedScores = localStorage.getItem("scores");
 
     if(!savedScores){
-        highScores.push({
-            "initials": inputInitialsEl.value,
-            "score": t
-        })
-    
-        localStorage.setItem("scores", JSON.stringify(highScores));
+        highScores=[];
+        if(inputInitialsEl.value == ""){
+            console.log("initials null");
+            validateInitialsEl.className="red-text";
+            var vanishMessage = setTimeout (function(){
+                validateInitialsEl.className="hidden";
+            },2000);
+        }
+        else{
+            highScores.push({
+                "initials": inputInitialsEl.value,
+                "score": t
+            });
+            localStorage.setItem("scores", JSON.stringify(highScores));
+            window.location.href="./high-scores.html";
+            // loadScores();
+            
+        }   
+        
     }
     else{
-        savedScores=JSON.parse(savedScores);
-        for (var i = 0; i < savedScores.length; i++) {
-            highScores.push(savedScores[i]);
+        highScores=[];
+        if(inputInitialsEl.value == ""){
+            console.log("initials null");
+            validateInitialsEl.className="red-text";
+            var vanishMessage = setTimeout (function(){
+                validateInitialsEl.className="hidden";
+            },2000);
         }
-        highScores.push({
-            "initials": inputInitialsEl.value,
-            "score": t
-        })
-        localStorage.setItem("scores", JSON.stringify(highScores));
+        else{
+        savedScores=JSON.parse(savedScores);
+            for (var i = 0; i < savedScores.length; i++) {
+                highScores.push(savedScores[i]);
+            }
+            highScores.push({
+                "initials": inputInitialsEl.value,
+                "score": t
+            });
+            localStorage.setItem("scores", JSON.stringify(highScores));
+            window.location.href="./high-scores.html";
+            
+            
+        }
+        
+        loadScores();
     }
 }// end of saveScores function
 
+var cancelScores = function(){
+    window.location.href="./index.html";
+}// end of cancelScores function
 
 
 
-
-// end of code for index.html page
 
 
 // CODE FOR high-scores.html PAGE ------------------------------------------------------------
@@ -224,29 +254,30 @@ var saveScores = function(){
 
 var loadScores = function(){
 
-    var savedScores = localStorage.getItem("scores");
+    console.log("load saved scores, please");
     
-    if(!savedScores){
-        noScoresMessageEl.className="";
-        }
+    // var savedScores = localStorage.getItem("scores");
+    
+    // if(!savedScores){
+    //     noScoresMessageEl.className="";
+    //     }
     
    
-    else{
+    // else{
         
-        savedScores=JSON.parse(savedScores);
-        for (var i = 0; i < 10; i++) {
-            var listItem = document.createElement("li");
-            listItem.className = "list-item";
-            listItem.textContent = savedScores[i].initials +": "+savedScores[i].score;
-            highScoresListEl.appendChild(listItem);
-        }
+    //     savedScores=JSON.parse(savedScores);
+    //     for (var i = 0; i < savedScores.length; i++) {
+    //         var listItem = document.createElement("li");
+    //         listItem.className = "list-item";
+    //         listItem.textContent = savedScores[i].initials +": "+savedScores[i].score;
+    //         highScoresListEl.appendChild(listItem);
+    //     }
         
       
-    }
-   return;
+    // }
+    // // return;
 }
 
-loadScores();
 
 
 
@@ -255,8 +286,13 @@ loadScores();
 
 
 
-startButtonEl.addEventListener("click",startQuiz);
-saveScoreBtnEl.addEventListener("click",saveScores);
+
+    startButtonEl.addEventListener("click",startQuiz);
+    saveScoreBtnEl.addEventListener("click",saveScores);
+    cancelScoreBtnEl.addEventListener("click",cancelScores);
+
+
+
 
 
 
