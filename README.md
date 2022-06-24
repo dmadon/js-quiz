@@ -47,6 +47,7 @@ View the repository: https://github.com/dmadon/js-quiz
 
 ![image](https://user-images.githubusercontent.com/99852346/175462567-f0c35f98-9f99-4ef2-837f-e3509d1a93fe.png)
 
+![image](https://user-images.githubusercontent.com/99852346/175462626-1c585551-99f1-436f-bedd-2774854e17c4.png)
 
 
 
