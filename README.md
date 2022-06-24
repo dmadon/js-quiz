@@ -40,3 +40,12 @@ View the deployed application: https://dmadon.github.io/js-quiz/
 
 View the repository: https://github.com/dmadon/js-quiz
 
+
+![image](https://user-images.githubusercontent.com/99852346/175462442-a23d9eb3-d9e2-48d7-89f7-1f7595210c80.png)
+
+
+
+
+
+
+
