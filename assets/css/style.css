@@ -66,6 +66,11 @@ div{
     text-align: left;
     display: block;
 }
+.answer-button{
+    font-size: 20px;
+    width: 60%;
+    padding: 2px 12px;
+}
 .button:hover, .answer-button:hover, .score-button:hover{
     background-color: var(--primary-color);
 }
