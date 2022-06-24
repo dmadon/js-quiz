@@ -36,7 +36,7 @@ This project was a challenge! To complete it, I broke it down into separate issu
 
 ## Links
 
-View the deployed application:
+View the deployed application: https://dmadon.github.io/js-quiz/
 
-View the repository: 
+View the repository: https://github.com/dmadon/js-quiz
 
