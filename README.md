@@ -30,7 +30,7 @@ This project was a challenge! To complete it, I broke it down into separate issu
 
     * Player has answered all questions and there is time remaining on the clock. Time remaining gets saved as final score.
 
-    * Player runs out of time before answering all the quesitons. Final score is saved as 0.
+    * Player runs out of time before answering all the questions. Final score is saved as 0.
 
 * Prompt user to enter initals and save their score to the high scores page, save recent scores in localStorage and load recent scores to the high scores page, prepending the most recent scores to the top of the list.
 
